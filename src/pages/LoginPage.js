@@ -13,9 +13,10 @@ const LoginPage = () => {
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:7000/auth/login', values);
+      console.log("this is response:",response);
       notification.success({ message: response.data.message });
       // Save username to context and local storage
-      login(values.email);
+      login(response.data.user.username);
       // Redirect to homepage upon successful login
       navigate('/');
     } catch (error) {
