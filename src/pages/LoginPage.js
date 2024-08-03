@@ -1,19 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Form, Input, Button, notification } from 'antd';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../auth/AuthProvider';
 
 const LoginPage = () => {
   const [loading, setLoading] = useState(false);
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
+  const { login } = useContext(AuthContext); // Get login function from context
 
   const onFinish = async (values) => {
     setLoading(true);
     try {
       const response = await axios.post('http://localhost:7000/auth/login', values);
       notification.success({ message: response.data.message });
-      // Save username to local storage
-      localStorage.setItem('username', values.email); // Save email or username
+      // Save username to context and local storage
+      login(values.email);
       // Redirect to homepage upon successful login
       navigate('/');
     } catch (error) {
