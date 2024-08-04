@@ -1,6 +1,8 @@
-import React, { useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../auth/AuthProvider";
+import React, { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../auth/AuthProvider';
+import CreateBlog from '../components/CreateBlog'; // Import CreateBlog component
+import BlogList from '../components/BlogList'; // Import BlogList component
 
 function BlogHome() {
   const navigate = useNavigate();
@@ -8,12 +10,16 @@ function BlogHome() {
 
   function logoutUser() {
     logout(); // Call logout from context
-    navigate("/login");
+    navigate('/login');
   }
 
   return (
     <div>
-      Welcome {user} <button onClick={logoutUser}>Logout</button>
+      <div>
+        Welcome {user} <button onClick={logoutUser}>Logout</button>
+      </div>
+      <CreateBlog /> {/* Include the CreateBlog component */}
+      <BlogList /> {/* Include the BlogList component */}
     </div>
   );
 }
