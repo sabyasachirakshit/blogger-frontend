@@ -11,11 +11,8 @@ function BlogHome() {
   return (
     <div>
       <Navbar />
-      <div>
-        Welcome {user} <button onClick={logoutUser}>Logout</button>
-      </div>
+      <BlogList />
       <CreateBlog /> {/* Include the CreateBlog component */}
-      <BlogList /> {/* Include the BlogList component */}
     </div>
   );
 }
